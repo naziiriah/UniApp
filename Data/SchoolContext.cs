@@ -14,7 +14,20 @@ namespace UniApp.Data
         {
         }
 
-        public DbSet<UniApp.Models.Student> Student { get; set; } = default!;
-        public DbSet<UniApp.Models.Instructor> Instructor { get; set; } = default!;
+        public DbSet<Student> Student { get; set; } = default!;
+        public DbSet<Instructor> Instructor { get; set; } = default!;
+        public DbSet<Course> Course { get; set; } = default!;
+        public DbSet<Department> Department { get; set; } = default!;
+        public DbSet<Enrollment> Enrollments { get; set; } = default!;
+        public DbSet<OfficeAssignment> OfficeAssignments { get; set; } = default!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Course>().ToTable(nameof(Course))
+                .HasMany(c => c.Instructors)
+                .WithMany(i => i.Courses);
+            modelBuilder.Entity<Student>().ToTable(nameof(Student));
+            modelBuilder.Entity<Instructor>().ToTable(nameof(Instructor));
+        }
     }
 }
