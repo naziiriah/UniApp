@@ -43,7 +43,7 @@ namespace UniApp.Pages.Students
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (Student  == null)
             {
                 return Page();
             }
